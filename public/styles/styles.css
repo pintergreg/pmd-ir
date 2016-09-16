@@ -1,0 +1,65 @@
+body{
+	background: #FDF6E3;
+	font-family: 'Baloo Tamma';
+    font-family: 'Amiko', sans-serif;
+}
+
+/* get rid of dotted selection border */
+*,*:hover,*:focus,*:active { outline: 0px none; }
+
+table{
+	border: 1px solid #002B36;
+	border-spacing: 0;
+	border-collapse: collapse;
+}
+
+tr{
+	margin: 0;
+	padding: 0;
+}
+
+th{
+	color: #073642;
+	padding: 3px 4px;
+}
+
+td{
+	padding: 3px 4px;
+	margin: 0px;
+	border-top: 1px solid #002B36;
+}
+
+.tablesorter th{
+	cursor: pointer;
+}
+
+.odd{
+	background: #EEE8D5;
+}
+
+.even{
+	background: #FDF6E3;
+}
+
+.center{
+	text-align: center;
+}
+
+.right{
+	text-align: right;
+/*
+	padding-right: 10px;
+*/
+}
+
+.left{
+	text-align: left;
+}
+
+a, a:focus, a:active{
+	color: #268BD2;
+}
+
+a:hover{
+	color: #2AA198;
+}
