@@ -41,7 +41,8 @@
 						%td.right= row["Problem"]
 						%td.center= row["Priority"]
 						%td.right
-							%a{:href => '/pmd/source?file='+row["File"].split("/").last+'&package='+row["Package"]+'#source.'+row["Line"]}= row["Line"]
+							= row["Line"]
+							-#%a{:href => '/pmd/source?file='+row["File"].split("/").last+'&package='+row["Package"]+'#source.'+row["Line"]}= row["Line"]
 						%td{:title => row["Rule set"]}= row["Description"]
 						
 		%h2

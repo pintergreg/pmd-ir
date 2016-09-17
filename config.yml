@@ -10,7 +10,6 @@ pmd:
     - Braces
     - Code Size
     - Controversial
-    - Coupling
     - Design
     - Empty Code
     - Import Statements
