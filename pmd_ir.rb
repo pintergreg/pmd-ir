@@ -3,17 +3,20 @@ require 'sinatra'
 require 'haml'
 require 'csv'
 require 'json'
+require 'yaml'
 require 'set'
+
+#### Sinatra parts
 
 set :haml, {:format => :html5 }
 
-
 get '/pmd' do
+	config = readConfig
+	@rules = config["pmd"]["rules"]
 	@data = readCSV "pmd.csv"
 	
 	haml :index
 end
-
 
 get '/pmd/source' do
 	@file = params[:file]
@@ -28,6 +31,12 @@ get '/pmd/source' do
 	@lines = uniqeErrorLines data_min
 	
 	haml :source
+end
+
+#### helper functions
+
+def readConfig
+	return YAML.load(File.open("config.yml", "rb").read)
 end
 
 # read the given CSV containing the PMD report

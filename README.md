@@ -10,5 +10,3 @@ http://prismjs.com/index.html for the source viewer, syntax highlighting, line n
 
 vex
 https://github.com/hubspot/vex
-
-And last, but not least the used color palette: http://ethanschoonover.com/solarized

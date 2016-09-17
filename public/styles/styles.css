@@ -1,21 +1,35 @@
+/* for the colors, the Solarized color palette is used: http://ethanschoonover.com/solarized */
+
 body{
 	background: #FDF6E3;
+/*
 	font-family: 'Baloo Tamma';
+*/
     font-family: 'Amiko', sans-serif;
 }
 
-/* get rid of dotted selection border */
+/* get rid of dotted selection borders in browsers */
 *,*:hover,*:focus,*:active { outline: 0px none; }
+
+/* anchor coloring */
+a, a:focus, a:active{
+	color: #073642;
+}
+
+a:hover{
+	color: #268BD2;
+}
+
+#error_table{
+	margin-top: 2em;
+}
 
 table{
 	border: 1px solid #002B36;
+	/* removing the gaps of the table */
 	border-spacing: 0;
+	/* prevent double borders */
 	border-collapse: collapse;
-}
-
-tr{
-	margin: 0;
-	padding: 0;
 }
 
 th{
@@ -30,10 +44,12 @@ td{
 	border-top: 1px solid #002B36;
 }
 
+/* apply pointer cursor to table header indication the possibility of action (sorting) */
 .tablesorter th{
 	cursor: pointer;
 }
 
+/* for zebra coloring - tablesorter plugin functionality */
 .odd{
 	background: #EEE8D5;
 }
@@ -42,27 +58,25 @@ td{
 	background: #FDF6E3;
 }
 
+/* align table content */
 .center{
 	text-align: center;
 }
 
 .right{
 	text-align: right;
-/*
-	padding-right: 10px;
-*/
 }
 
 .left{
 	text-align: left;
 }
 
-a, a:focus, a:active{
-	color: #268BD2;
-}
+/**** source view ****/
 
-a:hover{
-	color: #2AA198;
+#priority-legend a{
+	margin-top: 2em;
+	text-decoration: none;
+	color: #002B36;
 }
 
 h1.fileinfo{
@@ -72,9 +86,9 @@ h1.fileinfo{
 }
 
 pre {
-overflow: auto;
-word-wrap: normal;
-white-space: pre;
+	overflow: auto;
+	word-wrap: normal;
+	white-space: pre;
 }
 
 .line-highlight::before{
@@ -87,6 +101,10 @@ white-space: pre;
 	pointer-events: all !important;
 }
 
+/* 
+ * jsondiv stores the pmd output data in JSON format for the js scripts to use
+ * it should not be displayed
+ */
 #jsondiv{
 	display: none;
 }

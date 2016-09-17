@@ -11,6 +11,11 @@
 	%body{:onload => 'init();'}
 
 		%h1= "PMD Interactive Report"
+		
+		%div
+			%h2= "Applied rule sets"
+			- @rules.each do |r|
+				%a{:href => 'https://pmd.github.io/pmd-5.3.3/pmd-java/rules/index.html#' + r.gsub(/\ /, "_")}= r
 
 		%table.tablesorter{:id => 'error_table'}
 			%thead
@@ -30,5 +35,36 @@
 						%td.right= row["Problem"]
 						%td.center= row["Priority"]
 						%td.right
-							%a{:href => '/pmd/source?file='+row["File"].split("/").last+'#source.'+row["Line"]}= row["Line"]
-						%td= row["Description"]
+							%a{:href => '/pmd/source?file='+row["File"].split("/").last+'&package='+row["Package"]+'#source.'+row["Line"]}= row["Line"]
+						%td{:title => row["Rule set"]}= row["Description"]
+						
+		%h2{:id => 'priority-legend'}
+			%a{:href => 'https://pmd.github.io/pmd-5.3.3/customizing/rule-guidelines.html', :target => '_blank'}= "Priority legend"
+			
+		%table
+			%thead
+				%tr
+					%th Priority
+					%th Meaning
+					%th Description
+			%tbody
+				%tr
+					%td 1
+					%td Change absolutely required
+					%td Behavior is critically broken/buggy
+				%tr
+					%td 2
+					%td Change highly recommended
+					%td Behavior is quite likely to be broken/buggy
+				%tr
+					%td 3
+					%td Change recommended
+					%td Behavior is confusing, perhaps buggy, and/or against standards/best practices
+				%tr
+					%td 4
+					%td Change optional
+					%td Behavior is not likely to be buggy, but more just flies in the face of standards/style/good taste
+				%tr
+					%td 5
+					%td Change highly optional
+					%td Nice to have, such as a consistent naming policy for package/class/fields…

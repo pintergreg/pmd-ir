@@ -1,0 +1,19 @@
+---
+git:
+  repository: github
+  branch: master
+pmd:
+  rules:
+    - Basic
+    - Code Size
+    - Design
+    - Empty Code
+    - Import Statements
+    - Java Logging
+    - Naming
+    - Optimization
+    - Strict Exceptions
+    - String and StringBuffer
+    - Type Resolution
+    - Unnecessary
+    - Unused Code
