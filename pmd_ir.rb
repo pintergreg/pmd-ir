@@ -17,7 +17,8 @@ end
 
 get '/pmd/source' do
 	@file = params[:file]
-	@file_content = file = File.open("/mnt/sdb5/OE-NIK/PhD/bosch/debrecen/framework/UniDeb/src/com/unideb/bosch/automatedcar/PowertrainSystem.java", "rb").read
+	@package = params[:package].gsub(/\./, '/')
+	@file_content = file = File.open("/mnt/sdb5/OE-NIK/PhD/bosch/debrecen/framework/UniDeb/src/"+@package+"/"+@file, "rb").read
 	
 	@data = readCSV "pmd.csv"
 	data_min = @data.select { |key, value| key.to_s.match(/#{@file}/) }

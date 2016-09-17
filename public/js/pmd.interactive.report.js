@@ -23,7 +23,7 @@ function getRelevantError(dataJson, lineNumber){
 	var no = 1;
 	for(var i = 0; i < dataJson.length; i++) {
 		if (dataJson[i]["Line"] == lineNumber){
-			message += "\nError#" + no + " (with priority " +  dataJson[i]["Priority"] + "): " + dataJson[i]["Description"];
+			message += "\n#" + no + " (with priority " +  dataJson[i]["Priority"] + "): " + dataJson[i]["Description"];
 			no++;
 		}
 	}

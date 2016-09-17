@@ -2,7 +2,7 @@
 %html
 	%head
 		%meta{:charset => 'utf-8'}
-		%title PMD interactive report
+		%title PMD Interactive Report
 		%link{:rel => 'stylesheet', :type => 'text/css', :href => '/styles/styles.css'}
 		%script{:src => '/js/jquery-3.1.0.min.js'}
 		%script{:src => '/js/jquery.tablesorter.min.js'}
@@ -10,24 +10,25 @@
 		%script{:src => '/js/pmd.interactive.report.js'}
 	%body{:onload => 'init();'}
 
+		%h1= "PMD Interactive Report"
 
-	%table.tablesorter{:id => 'error_table'}
-		%thead
-			%tr
-				%th= "Package"
-				%th= "File"
-				%th= "Problem"
-				%th= "Priority"
-				%th= "Line"
-				%th= "Description"
-		%tbody
-			- @data[1,@data.length].each do |row|
+		%table.tablesorter{:id => 'error_table'}
+			%thead
 				%tr
-					%td= row["Package"]
-					%td
-						%a{:href => '/pmd/source?file='+row["File"].split("/").last}= row["File"].split("/").last
-					%td.right= row["Problem"]
-					%td.center= row["Priority"]
-					%td.right
-						%a{:href => '/pmd/source?file='+row["File"].split("/").last+'#source.'+row["Line"]}= row["Line"]
-					%td= row["Description"]
+					%th= "Package"
+					%th= "File"
+					%th= "Problem"
+					%th= "Priority"
+					%th= "Line"
+					%th= "Description"
+			%tbody
+				- @data[1,@data.length].each do |row|
+					%tr
+						%td= row["Package"]
+						%td
+							%a{:href => '/pmd/source?file='+row["File"].split("/").last+'&package='+row["Package"]}= row["File"].split("/").last
+						%td.right= row["Problem"]
+						%td.center= row["Priority"]
+						%td.right
+							%a{:href => '/pmd/source?file='+row["File"].split("/").last+'#source.'+row["Line"]}= row["Line"]
+						%td= row["Description"]
