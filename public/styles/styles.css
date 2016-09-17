@@ -95,6 +95,11 @@ pre {
 	white-space: pre;
 }
 
+/* 
+ * there was a bug when I used line numbering and line selecting at the same time,
+ * because line selection adds a line number, but was positioned incorrectly
+ * it was unnecessary for me so this ::before is removed
+ */
 .line-highlight::before{
 	display: none;
 }
@@ -102,6 +107,11 @@ pre {
 .line-highlight, .temporary{
 	text-align: right;
 	cursor: pointer;
+	/* 
+	 * line selection is implemented through divs, that are not clickable in order to
+	 * make it possible to select the underlying text. Text selection was not important
+	 * for me, but clickability was, I overrided this behaviour.
+	 */
 	pointer-events: all !important;
 }
 
