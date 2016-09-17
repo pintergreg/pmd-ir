@@ -4,11 +4,15 @@
 		%meta{:charset => 'utf-8'}
 		%title PMD interactive report
 		%link{:rel => 'stylesheet', :type => 'text/css', :href => '/styles/styles.css'}
-		%link{:rel => 'stylesheet', :type => 'text/css', :href => '/styles/solarized-light.css'}
+		%link{:rel => 'stylesheet', :type => 'text/css', :href => '/styles/prism.css'}
+		%link{:rel => 'stylesheet', :type => 'text/css', :href => '/styles/vex-theme-bottom-right-corner.css'}
 		%script{:src => '/js/jquery-3.1.0.min.js'}
-		%script{:src => '/js/highlight.pack.js'}
-		%script= "hljs.initHighlightingOnLoad();"
-	%body
-		%pre
-			%code{:class => 'java'}
+		%script{:src => '/js/prism.js'}
+		%script{:src => '/js/vex.combined.min.js'}
+		%script{:src => '/js/pmd.interactive.report.js'}
+	%body{:onload => 'annotateCode();'}
+		%h1{:class => 'fileinfo'}= @file
+		%pre{:id => 'source', :class => 'line-numbers', :'data-line' => @lines}
+			%code{:id => 'codeview', :class => 'language-java'}
 				= @file_content
+		%div{:id => 'jsondiv'}= @json

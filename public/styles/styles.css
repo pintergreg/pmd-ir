@@ -19,8 +19,12 @@ tr{
 }
 
 th{
+/*
 	color: #073642;
+*/
 	padding: 3px 4px;
+	background: #002B36;
+	color: #EEE8D5;
 }
 
 td{
@@ -62,4 +66,40 @@ a, a:focus, a:active{
 
 a:hover{
 	color: #2AA198;
+}
+
+h1.fileinfo{
+	background: #002B36;
+	color: #EEE8D5;
+	padding: 8px 24px;
+}
+
+pre {
+overflow: auto;
+word-wrap: normal;
+white-space: pre;
+}
+
+.line-highlight::before{
+	display: none;
+}
+
+.line-highlight{
+	text-align: right;
+	cursor: pointer;
+	pointer-events: all !important;
+}
+
+#jsondiv{
+	display: none;
+}
+
+.vex-content{
+	background: #002B36 !important;
+	color: #EEE8D5 !important;
+}
+
+.vex-dialog-buttons button{
+	background: #268BD2 !important;
+	color: #EEE8D5 !important;
 }

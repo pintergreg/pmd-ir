@@ -25,8 +25,9 @@
 				%tr
 					%td= row["Package"]
 					%td
-						%a{:href => '/pmd/source?file='+row["File"].split("/").last+'&line='+row["Line"]}= row["File"].split("/").last
+						%a{:href => '/pmd/source?file='+row["File"].split("/").last}= row["File"].split("/").last
 					%td.right= row["Problem"]
 					%td.center= row["Priority"]
-					%td.right= row["Line"]
+					%td.right
+						%a{:href => '/pmd/source?file='+row["File"].split("/").last+'#source.'+row["Line"]}= row["Line"]
 					%td= row["Description"]
