@@ -19,9 +19,6 @@ tr{
 }
 
 th{
-/*
-	color: #073642;
-*/
 	padding: 3px 4px;
 	background: #002B36;
 	color: #EEE8D5;
@@ -94,6 +91,7 @@ white-space: pre;
 	display: none;
 }
 
+/* overwriting vex color theme */
 .vex-content{
 	background: #002B36 !important;
 	color: #EEE8D5 !important;

@@ -1,5 +1,4 @@
 function init(){
-	
 	$('table.tablesorter').tablesorter({
 		widgets: ['zebra'],
 		textSorter: {
@@ -12,7 +11,6 @@ function annotateCode(){
 	var data = JSON.parse($('#jsondiv').html());
 	$('.line-highlight').each(function(index) {
 		//~ $(this).html(data[index]['Rule']);
-		//~ $(this).removeAttr("aria-hidden");
 		var line = Math.round(( $(this).position().top / $(this).height() ) + 1);
 		
 		$(this).attr("onclick", "tooltipAnnotation(this);");
