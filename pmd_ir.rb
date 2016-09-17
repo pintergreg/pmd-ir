@@ -14,16 +14,18 @@ set :haml, {:format => :html5 }
 get '/pmd' do
 	config = readConfig
 	
-	@latestCommit = cloneGitRepo config
+	@latestCommit = getGitRepo config
 	runPMD config
 	
 	@rules = config["pmd"]["rules"]
 	@data = readCSV config["workingDir"]+"/pmd.csv"
 	
+	# serve index page
 	haml :index
 end
 
 get '/pmd/source' do
+	# process URL parameters
 	@file = params[:file]
 	@package = params[:package].gsub(/\./, '/')
 	
@@ -35,9 +37,9 @@ get '/pmd/source' do
 	data_min = @data.select { |key, value| key.to_s.match(/#{@file}/) }
 	
 	@json = @data.select { |key, value| key.to_s.match(/#{@file}/) }.to_json.to_s
-	
 	@lines = uniqeErrorLines data_min
 	
+	# serve source view page
 	haml :source
 end
 
@@ -47,10 +49,14 @@ def readConfig
 	return YAML.load(File.open("config.yml", "rb").read)
 end
 
-def cloneGitRepo config
+# clones git repository or pulls changes if local exists and returns the latest commit
+def getGitRepo config
 	workingDir = config["workingDir"]
 	branch = config["git"]["branch"]
 	repository = config["git"]["repository"]
+	
+	# when working directory does not exist, create it and clone the repository
+	# otherwise just pull changes
 	if not Dir.exists? workingDir then
 		Dir.mkdir workingDir
 		g = Git.clone(repository, branch, :path => workingDir)
@@ -64,6 +70,8 @@ def cloneGitRepo config
 	return latestCommit
 end
 
+# builds arguments for PMD and executes the OS command
+# if expects that PMD is installed on the system!
 def runPMD config
 	cmd = "pmd -dir #{config["workingDir"]}/#{config["git"]["branch"]}/#{config["git"]["sourceDir"]} -f csv -R #{formatRules config} > #{config["workingDir"]}/pmd.csv"
 	
@@ -71,9 +79,11 @@ def runPMD config
 	value = %x[ #{cmd} ]
 end
 
+# builds the command line argument from the rules set names 
 def formatRules config
 	result = ""
 	
+	# rule set filename is not indicated from the name of the rule set, so a mapping is used
 	rulesetFiles = {"Android" => "android","Basic" => "basic","Braces" => "braces","Clone Implementation" => "clone","Code Size" => "codesize","Comments" => "comments","Controversial" => "controversial","Coupling" => "coupling","Design" => "design","Empty Code" => "empty","Finalizer" => "finalizers","Import Statements" => "imports","J2EE" => "j2ee","JavaBeans" => "javabeans","JUnit" => "junit","Jakarta Commons Logging" => "logging-jakarta-commons","Java Logging" => "logging-java","Migration" => "migrating","Naming" => "naming","Optimization" => "optimizations","Strict Exceptions" => "strictexception","String and StringBuffer" => "strings","Security Code Guidelines" => "sunsecure","Type Resolution" => "typeresolution","Unnecessary" => "unnecessary","Unused Code" => "unusedcode"}
 	
 	for r in config["pmd"]["rules"] do
@@ -90,6 +100,7 @@ def readCSV pmdReportCSVFile
 	return CSV.parse(csv_contents).map {|a| Hash[ keys.zip(a) ] }
 end
 
+# gets the error line numbers from the CSV data and builds a string listing them without duplication
 def uniqeErrorLines data
 	set = Set.new
 	for row in data do
