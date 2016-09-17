@@ -2,10 +2,7 @@
 
 body{
 	background: #FDF6E3;
-/*
-	font-family: 'Baloo Tamma';
-*/
-    font-family: 'Amiko', sans-serif;
+	font-family: sans-serif;
 }
 
 /* get rid of dotted selection borders in browsers */
@@ -71,18 +68,25 @@ td{
 	text-align: left;
 }
 
+.commitinfo{
+	background: #073642;
+	color: #EEE8D5;
+	padding: 4px 12px;
+}
+
 /**** source view ****/
 
-#priority-legend a{
+h2.link-header a{
 	margin-top: 2em;
 	text-decoration: none;
 	color: #002B36;
 }
 
-h1.fileinfo{
+h1{
 	background: #002B36;
 	color: #EEE8D5;
 	padding: 8px 24px;
+	margin-bottom: 0;
 }
 
 pre {
@@ -95,7 +99,7 @@ pre {
 	display: none;
 }
 
-.line-highlight{
+.line-highlight, .temporary{
 	text-align: right;
 	cursor: pointer;
 	pointer-events: all !important;

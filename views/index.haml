@@ -12,8 +12,14 @@
 
 		%h1= "PMD Interactive Report"
 		
+		%div.commitinfo
+			-#= "branch: " + "master"
+			-#%br
+			= "commit: " + @latestCommit.sha[0..6] + ", on " + @latestCommit.date.strftime("%Y-%m-%d") + ", from " + @latestCommit.committer.name + ", " +  @latestCommit.message
+		
 		%div
-			%h2= "Applied rule sets"
+			%h2
+				%a{:href => 'https://pmd.github.io/pmd-5.3.3/pmd-java/rules/index.html', :target => '_blank', :class => 'link-header'}= "Applied rule sets"
 			- @rules.each do |r|
 				%a{:href => 'https://pmd.github.io/pmd-5.3.3/pmd-java/rules/index.html#' + r.gsub(/\ /, "_")}= r
 
@@ -38,8 +44,8 @@
 							%a{:href => '/pmd/source?file='+row["File"].split("/").last+'&package='+row["Package"]+'#source.'+row["Line"]}= row["Line"]
 						%td{:title => row["Rule set"]}= row["Description"]
 						
-		%h2{:id => 'priority-legend'}
-			%a{:href => 'https://pmd.github.io/pmd-5.3.3/customizing/rule-guidelines.html', :target => '_blank'}= "Priority legend"
+		%h2
+			%a{:href => 'https://pmd.github.io/pmd-5.3.3/customizing/rule-guidelines.html', :target => '_blank', :class => 'link-header'}= "Priority legend"
 			
 		%table
 			%thead

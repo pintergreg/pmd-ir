@@ -1,7 +1,9 @@
 ---
+workingDir: /tmp/pmdgit
 git:
-  repository: github
+  repository: https://github.com/pintergreg/de-bosch-framework.git
   branch: master
+  sourceDir: src
 pmd:
   rules:
     - Basic
