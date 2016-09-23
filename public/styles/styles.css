@@ -104,7 +104,7 @@ pre {
 	display: none;
 }
 
-.line-highlight, .temporary{
+.line-highlight{
 	text-align: right;
 	cursor: pointer;
 	/* 
@@ -112,6 +112,14 @@ pre {
 	 * make it possible to select the underlying text. Text selection was not important
 	 * for me, but clickability was, I overrided this behaviour.
 	 */
+	pointer-events: all !important;
+	
+	/* make selection stronger */
+	background: linear-gradient(to right, hsla(24, 20%, 50%,.25) 70%, hsla(24, 20%, 50%,.05)) !important;
+}
+
+/* jump to line temporary selection */
+.temporary{
 	pointer-events: all !important;
 }
 

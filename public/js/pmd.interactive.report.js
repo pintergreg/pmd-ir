@@ -10,11 +10,18 @@ function init(){
 function annotateCode(){
 	var data = JSON.parse($('#jsondiv').html());
 	$('.line-highlight').each(function(index) {
-		//~ $(this).html(data[index]['Rule']);
 		var line = Math.round(( $(this).position().top / $(this).height() ) + 1);
 		
 		$(this).attr("onclick", "tooltipAnnotation(this);");
 		$(this).attr("title", getRelevantError(data, line));
+	});
+	/* temporary is set later, so I annotate it after everything is ready */
+	$( document ).ready(function() {
+		$('.temporary.line-highlight').each(function(index) {
+			var line = Math.round(( $(this).position().top / $(this).height() ) + 1);
+			$(this).attr("onclick", "tooltipAnnotation(this);");
+			$(this).attr("title", getRelevantError(data, line));
+		});
 	});
 }
 
