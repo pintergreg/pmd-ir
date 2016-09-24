@@ -6,6 +6,7 @@ require 'json'
 require 'yaml'
 require 'set'
 require 'git'
+require 'rest-client'
 
 #### Sinatra parts
 
@@ -63,7 +64,9 @@ def getGitRepo config
 		latestCommit = g.log.last
 	else
 		g = Git.open(workingDir + "/" + branch)
-		g.pull
+		if not isLatestGithubCommit? repository, g then
+			g.pull
+		end
 		latestCommit = g.log.last
 	end
 	
@@ -111,4 +114,21 @@ def uniqeErrorLines data
 		@lines += e + ","
 	end
 	return @lines[0..-2]
+end
+
+# checks whether repo is on GitHub, a GitHub API can be used
+# returns true if GitHub and the latest commit is in local repo
+# otherwise returns false
+def isLatestGithubCommit? repository, git
+	result = false
+	if repository.include? "github.com" then
+		
+		# uses a GitHub API to get the latest commit hash
+		json = JSON.parse RestClient.get('https://api.github.com/repos' + repository[/(.*)(github.com)(.*)(.git)/, 3] + '/commits')
+
+		if git.log.last == json[0]["sha"] then
+			result = true
+		end
+	end
+	return result
 end
